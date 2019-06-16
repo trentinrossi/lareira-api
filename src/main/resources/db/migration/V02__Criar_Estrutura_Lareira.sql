@@ -1,0 +1,65 @@
+CREATE TABLE LAREIRA (
+  idLareira INT NULL AUTO_INCREMENT,
+  Nome VARCHAR(45) NULL,
+  Endereco VARCHAR(100) NULL,
+  Bairro VARCHAR(45) NULL,
+  CEP VARCHAR(45) NULL,
+  Cidade VARCHAR(45) NULL,
+  Estado CHAR(2) NULL,
+  Telefone VARCHAR(45) NULL,
+  PRIMARY KEY (idLareira))
+ENGINE = InnoDB
+
+CREATE TABLE CASAL (
+  idLareira INT NOT NULL,
+  idCasal INT NOT NULL AUTO_INCREMENT,
+  MaridoNome VARCHAR(45) NULL,
+  MaridoSobrenome VARCHAR(45) NULL,
+  MaridoDataNascimento DATE NULL,
+  MaridoProfissao VARCHAR(45) NULL,
+  MaridoTelCelular VARCHAR(45) NULL,
+  MaridoEmail VARCHAR(70) NULL,
+  MaridoProblemaSaude VARCHAR(80) NULL,
+  EsposaNome VARCHAR(45) NULL,
+  EsposaSobrenome VARCHAR(45) NULL,
+  EsposaDataNascimento DATE NULL,
+  EsposaProfissao VARCHAR(45) NULL,
+  EsposaTelCelular VARCHAR(45) NULL,
+  EsposaEmail VARCHAR(70) NULL,
+  EsposaProblemaSaude VARCHAR(80) NULL,
+  PRIMARY KEY (idCasal, idLareira),
+  INDEX fk_CASAL_LAREIRA1_idx (idLareira ASC),
+  CONSTRAINT fk_CASAL_LAREIRA1
+    FOREIGN KEY (idLareira)
+    REFERENCES LAREIRA (idLareira)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+
+CREATE TABLE FILHO (
+  idLareira INT NOT NULL,
+  idCasal INT NOT NULL,
+  IdFilho INT NOT NULL AUTO_INCREMENT,
+  Nome VARCHAR(45) NULL,
+  Sexo CHAR(2) NULL,
+  DataNascimento DATE NULL,
+  PRIMARY KEY (IdFilho, idLareira, idCasal),
+  INDEX fk_FILHO_CASAL1_idx (idCasal ASC, idLareira ASC),
+  CONSTRAINT fk_FILHO_CASAL1
+    FOREIGN KEY (idCasal , idLareira)
+    REFERENCES CASAL (idCasal , idLareira)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+
+CREATE TABLE FUNCAO (
+  idFuncao INT NOT NULL AUTO_INCREMENT,
+  Nome VARCHAR(50) NULL,
+  PRIMARY KEY (idFuncao))
+ENGINE = InnoDB
+
+CREATE TABLE SETOR (
+  idSetor INT NOT NULL AUTO_INCREMENT,
+  Nome VARCHAR(50) NULL,
+  PRIMARY KEY (idSetor))
+ENGINE = InnoDB
