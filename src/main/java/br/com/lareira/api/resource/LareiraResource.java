@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +39,7 @@ public class LareiraResource {
 	private LareiraService service;
 
 	@PostMapping
+	@PreAuthorize("hasAuthority('LAREIRA_INSERT') and #oauth2.hasScope('write')")
 	public ResponseEntity<Lareira> inserir(@Valid @RequestBody Lareira lareira, HttpServletResponse response) {
 		Lareira lareiraSalva = repository.save(lareira);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, lareiraSalva.getIdLareira()));
@@ -45,23 +47,27 @@ public class LareiraResource {
 	}
 
 	@PutMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('LAREIRA_UPDATE') and #oauth2.hasScope('write')")
 	public ResponseEntity<Lareira> atualizar(@PathVariable Long codigo, @Valid @RequestBody Lareira lareira) {
 		Lareira lareiraSalva = service.atualizar(codigo, lareira);
 		return ResponseEntity.ok(lareiraSalva);
 	}
 
 	@DeleteMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('LAREIRA_DELETE') and #oauth2.hasScope('delete')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletar(@PathVariable Long codigo) {
 		repository.delete(codigo);
 	}
 
 	@GetMapping
+	@PreAuthorize("hasAuthority('LAREIRA_VIEW') and #oauth2.hasScope('read')")
 	public List<Lareira> listar() {
 		return repository.findAll();
 	}
 
 	@GetMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('LAREIRA_VIEW') and #oauth2.hasScope('read')")
 	public ResponseEntity<Lareira> retornaPeloCodigo(@PathVariable Long codigo) {
 		if (repository.findOne(codigo) == null) {
 			return ResponseEntity.notFound().build();
