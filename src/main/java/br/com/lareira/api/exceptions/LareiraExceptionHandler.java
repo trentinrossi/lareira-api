@@ -23,15 +23,24 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+/**
+ * Intercepta erros ocorridos em toda a API
+ * 
+ * @author Rodrigo Rossi
+ *
+ */
+
 @ControllerAdvice
 public class LareiraExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@Autowired
 	private MessageSource messageSource;
 
+	/**
+	 * Mensagem não legível
+	 */
 	@Override
-	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
+	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
 		String menagemUsuario = messageSource.getMessage("mensagem.invalida", null, LocaleContextHolder.getLocale());
 		String mensagemDesenvolvedor = ex.getCause() == null ? ex.toString() : ex.getCause().toString();
@@ -39,20 +48,28 @@ public class LareiraExceptionHandler extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(ex, new Erro(menagemUsuario, mensagemDesenvolvedor), headers, status, request);
 	}
 
+	/**
+	 * Argumento passado no método não é válido
+	 */
 	@Override
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 		List<Erro> erros = criarListaErros(ex.getBindingResult());
 
 		return handleExceptionInternal(ex, erros, headers, status, request);
 	}
 
+	/**
+	 * Devolve uma mensagem personalizada para o usuário e para o desenvolvedor quando ocorrer uma consulta em um recurso que não existe
+	 * 
+	 * @param ex - Erro
+	 * @param request - Request
+	 * @return
+	 * 
+	 */
 	@ExceptionHandler({ EmptyResultDataAccessException.class })
-	public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex,
-			WebRequest request) {
+	public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request) {
 
-		String menagemUsuario = messageSource.getMessage("recurso.nao-encontrado", null,
-				LocaleContextHolder.getLocale());
+		String menagemUsuario = messageSource.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
 		String mensagemDesenvolvedor = ex.toString();
 
 		List<Erro> erros = Arrays.asList(new Erro(menagemUsuario, mensagemDesenvolvedor));
@@ -60,12 +77,17 @@ public class LareiraExceptionHandler extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
 	}
 
+	/**
+	 * Devolve uma mensagem personalizada para o usuário e para o desenvolvedor quando ocorrer algum problema de integridade relacional do BD
+	 * 
+	 * @param ex
+	 * @param request
+	 * @return 
+	 */
 	@ExceptionHandler({ DataIntegrityViolationException.class })
-	public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex,
-			WebRequest request) {
+	public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
 
-		String menagemUsuario = messageSource.getMessage("recurso.operacao-nao-permitida", null,
-				LocaleContextHolder.getLocale());
+		String menagemUsuario = messageSource.getMessage("recurso.operacao-nao-permitida", null, LocaleContextHolder.getLocale());
 		String mensagemDesenvolvedor = ExceptionUtils.getRootCauseMessage(ex);
 
 		List<Erro> erros = Arrays.asList(new Erro(menagemUsuario, mensagemDesenvolvedor));
@@ -73,20 +95,32 @@ public class LareiraExceptionHandler extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
 
+	/**
+	 * Devolve uma mensagem personalizada para o usuário e para o desenvolvedor quando ocorrer uma consulta em um recurso que não existe
+	 * 
+	 * @param ex
+	 * @param request
+	 * @return
+	 */
 	@ExceptionHandler({ EntityNotFoundException.class })
 	public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex, WebRequest request) {
 
-		String menagemUsuario = messageSource.getMessage("recurso.nao-encontrado", null,
-				LocaleContextHolder.getLocale());
+		String menagemUsuario = messageSource.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
 		String mensagemDesenvolvedor = ex.toString();
 
 		List<Erro> erros = Arrays.asList(new Erro(menagemUsuario, mensagemDesenvolvedor));
 
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
 	}
-
-	// bindingResults = Lista com todos os erros
-	// getFieldErrors = Retorna a lista com o erro de cada campo
+	
+	/**
+	 * Cria uma lista com todos os erros ocorridos na chamada
+	 * 
+	 * getFieldErrors = Retorna a lista com o erro de cada campo
+	 * 
+	 * @param bindingResults - Lista com todos os erros
+	 * @return
+	 */
 	private List<Erro> criarListaErros(BindingResult bindingResults) {
 		List<Erro> erros = new ArrayList<>();
 
