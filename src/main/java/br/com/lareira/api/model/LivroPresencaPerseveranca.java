@@ -18,7 +18,8 @@ public class LivroPresencaPerseveranca implements Serializable {
 	@EmbeddedId
 	protected LivroPresencaPerseverancaPK livroPresencaPerseverancaPK;
 
-	@JoinColumns({ @JoinColumn(name = "idcasalanfitriao", referencedColumnName = "idcasal"),
+	@JoinColumns({ 
+			@JoinColumn(name = "idcasalanfitriao", referencedColumnName = "idcasal", insertable = false, updatable = false),
 			@JoinColumn(name = "idlareira", referencedColumnName = "idlareira", insertable = false, updatable = false) })
 	@ManyToOne(optional = false)
 	private Casal casal;

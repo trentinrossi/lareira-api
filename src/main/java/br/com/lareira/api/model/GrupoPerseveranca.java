@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -30,17 +28,16 @@ public class GrupoPerseveranca implements Serializable {
 	private String nome;
 
 	@Column(name = "datainicio")
-	@Temporal(TemporalType.DATE)
 	private LocalDate dataInicio;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoperseveranca")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoPerseveranca")
 	private List<GrupoPerseverancaCasais> grupoPerseverancaCasaisList;
 
-	@JoinColumn(name = "idLareira", referencedColumnName = "idLareira", insertable = false, updatable = false)
+	@JoinColumn(name = "idlareira", referencedColumnName = "idlareira", insertable = false, updatable = false)
 	@ManyToOne(optional = false)
 	private Lareira lareira;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoperseveranca")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoPerseveranca")
 	private List<LivroPresencaPerseveranca> livroPresencaPerseverancaList;
 
 	public GrupoPerseverancaPK getGrupoPerseverancaPK() {

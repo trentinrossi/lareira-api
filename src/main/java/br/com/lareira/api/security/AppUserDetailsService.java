@@ -10,7 +10,6 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,22 +29,14 @@ public class AppUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(email);
-		Usuario usuario = usuarioOptional
-				.orElseThrow(() -> new UsernameNotFoundException("Usuário e/ou senha incorretos"));
+		Usuario usuario = usuarioOptional.orElseThrow(() -> new UsernameNotFoundException("Usuário e/ou senha incorretos"));
 
-		return new User(email, usuario.getSenha(), getPermissoes2(usuario));
+		return new UsuarioSistema(usuario, getPermissoes(usuario));
 	}
 
-//	private Collection<? extends GrantedAuthority> getPermissoes(Usuario usuario) {
-//		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-//		authorities.add(new SimpleGrantedAuthority("ROLE_CADASTRAR_CATEGORIA"));
-//		return authorities;
-//	}
-
-	private Collection<? extends GrantedAuthority> getPermissoes2(Usuario usuario) {
+	private Collection<? extends GrantedAuthority> getPermissoes(Usuario usuario) {
 		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 
-		// Usuario u = usuarioRepository.getOne((long) usuario.getIdUsuario());
 		List<UsuarioGrupo> lista = usuario.getUsuarioGrupoList();
 		System.out.println(lista);
 

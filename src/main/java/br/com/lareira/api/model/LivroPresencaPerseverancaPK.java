@@ -6,8 +6,6 @@ import java.time.LocalDate;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Embeddable
@@ -31,13 +29,11 @@ public class LivroPresencaPerseverancaPK implements Serializable {
 	@Basic(optional = false)
 	@NotNull
 	@Column(name = "data")
-	@Temporal(TemporalType.DATE)
 	private LocalDate data;
 
 	@Basic(optional = false)
 	@NotNull
 	@Column(name = "hora")
-	@Temporal(TemporalType.TIME)
 	private LocalDate hora;
 
 	public int getIdLareira() {

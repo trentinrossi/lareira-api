@@ -13,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -43,7 +41,6 @@ public class Casal implements Serializable {
     private String maridoSobrenome;
     
     @Column(name = "maridodatanascimento")
-    @Temporal(TemporalType.DATE)
     private LocalDate maridoDataNascimento;
     
     @Size(max = 45)
@@ -71,7 +68,6 @@ public class Casal implements Serializable {
     private String esposaSobrenome;
     
     @Column(name = "esposadatanascimento")
-    @Temporal(TemporalType.DATE)
     private LocalDate esposaDataNascimento;
     
     @Size(max = 45)
