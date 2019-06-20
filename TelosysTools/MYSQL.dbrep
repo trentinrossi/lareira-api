@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Telosys Database Repository --><root>
+<tableList databaseId="0" databaseName="MYSQL" databaseProductName="MySQL" generation="2019-06-16 21:41:00">
+<table catalog="lareira" databaseType="TABLE" javaBean="Casal" name="casal" schema="">
+<column dbComment="" dbDefaultValue="" dbName="idLareira" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="idlareira" javaType="java.lang.Integer" jdbcTypeCode="4" label="Idlareira" notNull="true" selected="true"/>
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="idCasal" dbNotNull="true" dbPosition="2" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="idcasal" javaType="java.lang.Integer" jdbcTypeCode="4" label="Idcasal" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="MaridoNome" dbNotNull="false" dbPosition="3" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="maridonome" javaType="java.lang.String" jdbcTypeCode="12" label="Maridonome" maxLength="45" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="MaridoSobrenome" dbNotNull="false" dbPosition="4" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="maridosobrenome" javaType="java.lang.String" jdbcTypeCode="12" label="Maridosobrenome" maxLength="45" notNull="false" selected="true"/>
+<column dateType="D" dbComment="" dbDefaultValue="" dbName="MaridoDataNascimento" dbNotNull="false" dbPosition="5" dbSize="10" dbTypeName="DATE" inputType="date" javaName="maridodatanascimento" javaType="java.util.Date" jdbcTypeCode="91" label="Maridodatanascimento" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="MaridoProfissao" dbNotNull="false" dbPosition="6" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="maridoprofissao" javaType="java.lang.String" jdbcTypeCode="12" label="Maridoprofissao" maxLength="45" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="MaridoTelCelular" dbNotNull="false" dbPosition="7" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="maridotelcelular" javaType="java.lang.String" jdbcTypeCode="12" label="Maridotelcelular" maxLength="45" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="MaridoEmail" dbNotNull="false" dbPosition="8" dbSize="70" dbTypeName="VARCHAR" inputType="text" javaName="maridoemail" javaType="java.lang.String" jdbcTypeCode="12" label="Maridoemail" maxLength="70" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="MaridoProblemaSaude" dbNotNull="false" dbPosition="9" dbSize="80" dbTypeName="VARCHAR" inputType="text" javaName="maridoproblemasaude" javaType="java.lang.String" jdbcTypeCode="12" label="Maridoproblemasaude" maxLength="80" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="EsposaNome" dbNotNull="false" dbPosition="10" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="esposanome" javaType="java.lang.String" jdbcTypeCode="12" label="Esposanome" maxLength="45" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="EsposaSobrenome" dbNotNull="false" dbPosition="11" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="esposasobrenome" javaType="java.lang.String" jdbcTypeCode="12" label="Esposasobrenome" maxLength="45" notNull="false" selected="true"/>
+<column dateType="D" dbComment="" dbDefaultValue="" dbName="EsposaDataNascimento" dbNotNull="false" dbPosition="12" dbSize="10" dbTypeName="DATE" inputType="date" javaName="esposadatanascimento" javaType="java.util.Date" jdbcTypeCode="91" label="Esposadatanascimento" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="EsposaProfissao" dbNotNull="false" dbPosition="13" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="esposaprofissao" javaType="java.lang.String" jdbcTypeCode="12" label="Esposaprofissao" maxLength="45" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="EsposaTelCelular" dbNotNull="false" dbPosition="14" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="esposatelcelular" javaType="java.lang.String" jdbcTypeCode="12" label="Esposatelcelular" maxLength="45" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="EsposaEmail" dbNotNull="false" dbPosition="15" dbSize="70" dbTypeName="VARCHAR" inputType="text" javaName="esposaemail" javaType="java.lang.String" jdbcTypeCode="12" label="Esposaemail" maxLength="70" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="EsposaProblemaSaude" dbNotNull="false" dbPosition="16" dbSize="80" dbTypeName="VARCHAR" inputType="text" javaName="esposaproblemasaude" javaType="java.lang.String" jdbcTypeCode="12" label="Esposaproblemasaude" maxLength="80" notNull="false" selected="true"/>
+<fk name="fk_CASAL_LAREIRA1">
+<fkcol colname="idLareira" colref="idLareira" deferrable="7" deleterule="3" sequence="1" tablename="casal" tableref="lareira" updaterule="3"/>
+</fk>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_FILHO_CASAL1" id="LINK_FK_fk_FILHO_CASAL1_I" inverseSideOf="LINK_FK_fk_FILHO_CASAL1_O" javaName="listOfFilho" javaType="java.util.List" joinTableName="" mappedBy="casal" optional="" owningSide="false" sourceTableName="casal" targetEntity="Filho" targetTableName="filho" used="true"/>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_CASAL_LAREIRA1" id="LINK_FK_fk_CASAL_LAREIRA1_O" inverseSideOf="" javaName="lareira" javaType="Lareira" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="casal" targetEntity="Lareira" targetTableName="lareira" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="idLareira" nullable="true" referencedColumnName="idLareira" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+<table catalog="lareira" databaseType="TABLE" javaBean="Entidade" name="entidade" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="idEntidade" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="identidade" javaType="java.lang.Integer" jdbcTypeCode="4" label="Identidade" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Nome" dbNotNull="false" dbPosition="2" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="nome" javaType="java.lang.String" jdbcTypeCode="12" label="Nome" maxLength="45" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="NomeTabelaBanco" dbNotNull="false" dbPosition="3" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="nometabelabanco" javaType="java.lang.String" jdbcTypeCode="12" label="Nometabelabanco" maxLength="45" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Descricao" dbNotNull="false" dbPosition="4" dbSize="100" dbTypeName="VARCHAR" inputType="text" javaName="descricao" javaType="java.lang.String" jdbcTypeCode="12" label="Descricao" maxLength="100" notNull="false" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_PERMISSAO_ENTIDADE1" id="LINK_FK_fk_PERMISSAO_ENTIDADE1_I" inverseSideOf="LINK_FK_fk_PERMISSAO_ENTIDADE1_O" javaName="listOfPermissao" javaType="java.util.List" joinTableName="" mappedBy="entidade" optional="" owningSide="false" sourceTableName="entidade" targetEntity="Permissao" targetTableName="permissao" used="true"/>
+</table>
+<table catalog="lareira" databaseType="TABLE" javaBean="Filho" name="filho" schema="">
+<column dbComment="" dbDefaultValue="" dbName="idLareira" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="idlareira" javaType="java.lang.Integer" jdbcTypeCode="4" label="Idlareira" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="idCasal" dbNotNull="true" dbPosition="2" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="idcasal" javaType="java.lang.Integer" jdbcTypeCode="4" label="Idcasal" notNull="true" selected="true"/>
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="IdFilho" dbNotNull="true" dbPosition="3" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="idfilho" javaType="java.lang.Integer" jdbcTypeCode="4" label="Idfilho" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Nome" dbNotNull="false" dbPosition="4" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="nome" javaType="java.lang.String" jdbcTypeCode="12" label="Nome" maxLength="45" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Sexo" dbNotNull="false" dbPosition="5" dbSize="2" dbTypeName="CHAR" inputType="text" javaName="sexo" javaType="java.lang.String" jdbcTypeCode="1" label="Sexo" maxLength="2" notNull="false" selected="true"/>
+<column dateType="D" dbComment="" dbDefaultValue="" dbName="DataNascimento" dbNotNull="false" dbPosition="6" dbSize="10" dbTypeName="DATE" inputType="date" javaName="datanascimento" javaType="java.util.Date" jdbcTypeCode="91" label="Datanascimento" notNull="false" selected="true"/>
+<fk name="fk_FILHO_CASAL1">
+<fkcol colname="idCasal" colref="idCasal" deferrable="7" deleterule="3" sequence="1" tablename="filho" tableref="casal" updaterule="3"/>
+<fkcol colname="idLareira" colref="idLareira" deferrable="7" deleterule="3" sequence="2" tablename="filho" tableref="casal" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_FILHO_CASAL1" id="LINK_FK_fk_FILHO_CASAL1_O" inverseSideOf="" javaName="casal" javaType="Casal" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="filho" targetEntity="Casal" targetTableName="casal" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="idCasal" nullable="true" referencedColumnName="idCasal" unique="false" updatable="false"/>
+<joinColumn insertable="false" name="idLareira" nullable="true" referencedColumnName="idLareira" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+<table catalog="lareira" databaseType="TABLE" javaBean="Funcao" name="funcao" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="idFuncao" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="idfuncao" javaType="java.lang.Integer" jdbcTypeCode="4" label="Idfuncao" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Nome" dbNotNull="false" dbPosition="2" dbSize="50" dbTypeName="VARCHAR" inputType="text" javaName="nome" javaType="java.lang.String" jdbcTypeCode="12" label="Nome" maxLength="50" notNull="false" selected="true"/>
+</table>
+<table catalog="lareira" databaseType="TABLE" javaBean="Grupo" name="grupo" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="idGrupo" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="idgrupo" javaType="java.lang.Integer" jdbcTypeCode="4" label="Idgrupo" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Nome" dbNotNull="false" dbPosition="2" dbSize="100" dbTypeName="VARCHAR" inputType="text" javaName="nome" javaType="java.lang.String" jdbcTypeCode="12" label="Nome" maxLength="100" notNull="false" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_USUARIO_GRUPO_GRUPO1" id="LINK_FK_fk_USUARIO_GRUPO_GRUPO1_I" inverseSideOf="LINK_FK_fk_USUARIO_GRUPO_GRUPO1_O" javaName="listOfUsuarioGrupo" javaType="java.util.List" joinTableName="" mappedBy="grupo" optional="" owningSide="false" sourceTableName="grupo" targetEntity="UsuarioGrupo" targetTableName="usuario_grupo" used="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_PERMISSAO_GRUPO1" id="LINK_FK_fk_PERMISSAO_GRUPO1_I" inverseSideOf="LINK_FK_fk_PERMISSAO_GRUPO1_O" javaName="listOfPermissao" javaType="java.util.List" joinTableName="" mappedBy="grupo" optional="" owningSide="false" sourceTableName="grupo" targetEntity="Permissao" targetTableName="permissao" used="true"/>
+</table>
+<table catalog="lareira" databaseType="TABLE" javaBean="Lareira" name="lareira" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="idLareira" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="idlareira" javaType="java.lang.Integer" jdbcTypeCode="4" label="Idlareira" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Nome" dbNotNull="false" dbPosition="2" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="nome" javaType="java.lang.String" jdbcTypeCode="12" label="Nome" maxLength="45" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Endereco" dbNotNull="false" dbPosition="3" dbSize="100" dbTypeName="VARCHAR" inputType="text" javaName="endereco" javaType="java.lang.String" jdbcTypeCode="12" label="Endereco" maxLength="100" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Bairro" dbNotNull="false" dbPosition="4" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="bairro" javaType="java.lang.String" jdbcTypeCode="12" label="Bairro" maxLength="45" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="CEP" dbNotNull="false" dbPosition="5" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="cep" javaType="java.lang.String" jdbcTypeCode="12" label="Cep" maxLength="45" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Cidade" dbNotNull="false" dbPosition="6" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="cidade" javaType="java.lang.String" jdbcTypeCode="12" label="Cidade" maxLength="45" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Estado" dbNotNull="false" dbPosition="7" dbSize="2" dbTypeName="CHAR" inputType="text" javaName="estado" javaType="java.lang.String" jdbcTypeCode="1" label="Estado" maxLength="2" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Telefone" dbNotNull="false" dbPosition="8" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="telefone" javaType="java.lang.String" jdbcTypeCode="12" label="Telefone" maxLength="45" notNull="false" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_CASAL_LAREIRA1" id="LINK_FK_fk_CASAL_LAREIRA1_I" inverseSideOf="LINK_FK_fk_CASAL_LAREIRA1_O" javaName="listOfCasal" javaType="java.util.List" joinTableName="" mappedBy="lareira" optional="" owningSide="false" sourceTableName="lareira" targetEntity="Casal" targetTableName="casal" used="true"/>
+</table>
+<table catalog="lareira" databaseType="TABLE" javaBean="Permissao" name="permissao" schema="">
+<column dbComment="" dbDefaultValue="" dbName="idGrupo" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="idgrupo" javaType="java.lang.Integer" jdbcTypeCode="4" label="Idgrupo" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="idEntidade" dbNotNull="true" dbPosition="2" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="identidade" javaType="java.lang.Integer" jdbcTypeCode="4" label="Identidade" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="canInsert" dbNotNull="false" dbPosition="3" dbSize="0" dbTypeName="BIT" inputType="checkbox" javaName="caninsert" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Caninsert" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="canUpdate" dbNotNull="false" dbPosition="4" dbSize="0" dbTypeName="BIT" inputType="checkbox" javaName="canupdate" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Canupdate" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="canDelete" dbNotNull="false" dbPosition="5" dbSize="0" dbTypeName="BIT" inputType="checkbox" javaName="candelete" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Candelete" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="canView" dbNotNull="false" dbPosition="6" dbSize="0" dbTypeName="BIT" inputType="checkbox" javaName="canview" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Canview" notNull="false" selected="true"/>
+<fk name="fk_PERMISSAO_ENTIDADE1">
+<fkcol colname="idEntidade" colref="idEntidade" deferrable="7" deleterule="3" sequence="1" tablename="permissao" tableref="entidade" updaterule="3"/>
+</fk>
+<fk name="fk_PERMISSAO_GRUPO1">
+<fkcol colname="idGrupo" colref="idGrupo" deferrable="7" deleterule="3" sequence="1" tablename="permissao" tableref="grupo" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_PERMISSAO_GRUPO1" id="LINK_FK_fk_PERMISSAO_GRUPO1_O" inverseSideOf="" javaName="grupo" javaType="Grupo" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="permissao" targetEntity="Grupo" targetTableName="grupo" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="idGrupo" nullable="true" referencedColumnName="idGrupo" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_PERMISSAO_ENTIDADE1" id="LINK_FK_fk_PERMISSAO_ENTIDADE1_O" inverseSideOf="" javaName="entidade" javaType="Entidade" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="permissao" targetEntity="Entidade" targetTableName="entidade" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="idEntidade" nullable="true" referencedColumnName="idEntidade" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+<table catalog="lareira" databaseType="TABLE" javaBean="SchemaVersion" name="schema_version" schema="">
+<column dbComment="" dbDefaultValue="" dbName="version_rank" dbNotNull="true" dbPosition="1" dbSize="10" dbTypeName="INT" inputType="number" javaName="versionRank" javaType="java.lang.Integer" jdbcTypeCode="4" label="Version rank" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="installed_rank" dbNotNull="true" dbPosition="2" dbSize="10" dbTypeName="INT" inputType="number" javaName="installedRank" javaType="java.lang.Integer" jdbcTypeCode="4" label="Installed rank" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="version" dbNotNull="true" dbPosition="3" dbPrimaryKey="true" dbSize="50" dbTypeName="VARCHAR" inputType="text" javaName="version" javaType="java.lang.String" jdbcTypeCode="12" label="Version" maxLength="50" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="description" dbNotNull="true" dbPosition="4" dbSize="200" dbTypeName="VARCHAR" inputType="text" javaName="description" javaType="java.lang.String" jdbcTypeCode="12" label="Description" maxLength="200" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="type" dbNotNull="true" dbPosition="5" dbSize="20" dbTypeName="VARCHAR" inputType="text" javaName="type" javaType="java.lang.String" jdbcTypeCode="12" label="Type" maxLength="20" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="script" dbNotNull="true" dbPosition="6" dbSize="1000" dbTypeName="VARCHAR" inputType="text" javaName="script" javaType="java.lang.String" jdbcTypeCode="12" label="Script" maxLength="1000" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="checksum" dbNotNull="false" dbPosition="7" dbSize="10" dbTypeName="INT" inputType="number" javaName="checksum" javaType="java.lang.Integer" jdbcTypeCode="4" label="Checksum" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="installed_by" dbNotNull="true" dbPosition="8" dbSize="100" dbTypeName="VARCHAR" inputType="text" javaName="installedBy" javaType="java.lang.String" jdbcTypeCode="12" label="Installed by" maxLength="100" notEmpty="true" notNull="true" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="CURRENT_TIMESTAMP" dbName="installed_on" dbNotNull="true" dbPosition="9" dbSize="19" dbTypeName="TIMESTAMP" inputType="" javaName="installedOn" javaType="java.util.Date" jdbcTypeCode="93" label="Installed on" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="execution_time" dbNotNull="true" dbPosition="10" dbSize="10" dbTypeName="INT" inputType="number" javaName="executionTime" javaType="java.lang.Integer" jdbcTypeCode="4" label="Execution time" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="success" dbNotNull="true" dbPosition="11" dbSize="0" dbTypeName="BIT" inputType="checkbox" javaName="success" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Success" notNull="true" selected="true"/>
+</table>
+<table catalog="lareira" databaseType="TABLE" javaBean="Setor" name="setor" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="idSetor" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="idsetor" javaType="java.lang.Integer" jdbcTypeCode="4" label="Idsetor" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Nome" dbNotNull="false" dbPosition="2" dbSize="50" dbTypeName="VARCHAR" inputType="text" javaName="nome" javaType="java.lang.String" jdbcTypeCode="12" label="Nome" maxLength="50" notNull="false" selected="true"/>
+</table>
+<table catalog="lareira" databaseType="TABLE" javaBean="Usuario" name="usuario" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="idUsuario" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="idusuario" javaType="java.lang.Integer" jdbcTypeCode="4" label="Idusuario" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Login" dbNotNull="true" dbPosition="2" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="login" javaType="java.lang.String" jdbcTypeCode="12" label="Login" maxLength="255" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Senha" dbNotNull="false" dbPosition="3" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="senha" javaType="java.lang.String" jdbcTypeCode="12" label="Senha" maxLength="255" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="NomeCompleto" dbNotNull="false" dbPosition="4" dbSize="100" dbTypeName="VARCHAR" inputType="text" javaName="nomecompleto" javaType="java.lang.String" jdbcTypeCode="12" label="Nomecompleto" maxLength="100" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Email" dbNotNull="false" dbPosition="5" dbSize="100" dbTypeName="VARCHAR" inputType="text" javaName="email" javaType="java.lang.String" jdbcTypeCode="12" label="Email" maxLength="100" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Descricao" dbNotNull="false" dbPosition="6" dbSize="100" dbTypeName="VARCHAR" inputType="text" javaName="descricao" javaType="java.lang.String" jdbcTypeCode="12" label="Descricao" maxLength="100" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="Ativo" dbNotNull="false" dbPosition="7" dbSize="0" dbTypeName="BIT" inputType="checkbox" javaName="ativo" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Ativo" notNull="false" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_USUARIO_GRUPO_USUARIO1" id="LINK_FK_fk_USUARIO_GRUPO_USUARIO1_I" inverseSideOf="LINK_FK_fk_USUARIO_GRUPO_USUARIO1_O" javaName="listOfUsuarioGrupo" javaType="java.util.List" joinTableName="" mappedBy="usuario" optional="" owningSide="false" sourceTableName="usuario" targetEntity="UsuarioGrupo" targetTableName="usuario_grupo" used="true"/>
+</table>
+<table catalog="lareira" databaseType="TABLE" javaBean="UsuarioGrupo" name="usuario_grupo" schema="">
+<column dbComment="" dbDefaultValue="" dbName="idGrupo" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="idgrupo" javaType="java.lang.Integer" jdbcTypeCode="4" label="Idgrupo" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="idUsuario" dbNotNull="true" dbPosition="2" dbSize="10" dbTypeName="INT" inputType="number" javaName="idusuario" javaType="java.lang.Integer" jdbcTypeCode="4" label="Idusuario" notNull="true" selected="true"/>
+<fk name="fk_USUARIO_GRUPO_GRUPO1">
+<fkcol colname="idGrupo" colref="idGrupo" deferrable="7" deleterule="3" sequence="1" tablename="usuario_grupo" tableref="grupo" updaterule="3"/>
+</fk>
+<fk name="fk_USUARIO_GRUPO_USUARIO1">
+<fkcol colname="idUsuario" colref="idUsuario" deferrable="7" deleterule="3" sequence="1" tablename="usuario_grupo" tableref="usuario" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_USUARIO_GRUPO_USUARIO1" id="LINK_FK_fk_USUARIO_GRUPO_USUARIO1_O" inverseSideOf="" javaName="usuario" javaType="Usuario" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="usuario_grupo" targetEntity="Usuario" targetTableName="usuario" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="idUsuario" nullable="true" referencedColumnName="idUsuario" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_USUARIO_GRUPO_GRUPO1" id="LINK_FK_fk_USUARIO_GRUPO_GRUPO1_O" inverseSideOf="" javaName="grupo" javaType="Grupo" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="usuario_grupo" targetEntity="Grupo" targetTableName="grupo" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="idGrupo" nullable="true" referencedColumnName="idGrupo" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+</tableList>
+</root>
