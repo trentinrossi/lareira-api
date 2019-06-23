@@ -4,13 +4,15 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -18,9 +20,17 @@ import javax.validation.constraints.Size;
 public class Filho implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	@EmbeddedId
-	protected FilhoPK filhoPK;
 
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idfilho")
+    private Long idFilho;
+
+	@NotNull
+	@JoinColumn(name = "idcasal", insertable = false, updatable = false, nullable=false)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	private Casal casal;
+	
 	@Size(max = 45)
 	@Column(name = "nome")
 	private String nome;
@@ -32,18 +42,20 @@ public class Filho implements Serializable {
 	@Column(name = "datanascimento")
 	private LocalDate dataNascimento;
 
-	@JoinColumns({
-			@JoinColumn(name = "idcasal", referencedColumnName = "idcasal", insertable = false, updatable = false),
-			@JoinColumn(name = "idlareira", referencedColumnName = "idlareira", insertable = false, updatable = false) })
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
-	private Casal casal;
-
-	public FilhoPK getFilhoPK() {
-		return filhoPK;
+	public Long getIdFilho() {
+		return idFilho;
 	}
 
-	public void setFilhoPK(FilhoPK filhoPK) {
-		this.filhoPK = filhoPK;
+	public void setIdFilho(Long idFilho) {
+		this.idFilho = idFilho;
+	}
+
+	public Casal getCasal() {
+		return casal;
+	}
+
+	public void setCasal(Casal casal) {
+		this.casal = casal;
 	}
 
 	public String getNome() {
@@ -70,19 +82,11 @@ public class Filho implements Serializable {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public Casal getCasal() {
-		return casal;
-	}
-
-	public void setCasal(Casal casal) {
-		this.casal = casal;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((filhoPK == null) ? 0 : filhoPK.hashCode());
+		result = prime * result + ((idFilho == null) ? 0 : idFilho.hashCode());
 		return result;
 	}
 
@@ -95,11 +99,17 @@ public class Filho implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Filho other = (Filho) obj;
-		if (filhoPK == null) {
-			if (other.filhoPK != null)
+		if (idFilho == null) {
+			if (other.idFilho != null)
 				return false;
-		} else if (!filhoPK.equals(other.filhoPK))
+		} else if (!idFilho.equals(other.idFilho))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Filho [idFilho=" + idFilho + ", casal=" + casal + ", nome=" + nome + ", sexo=" + sexo
+				+ ", dataNascimento=" + dataNascimento + "]";
 	}
 }

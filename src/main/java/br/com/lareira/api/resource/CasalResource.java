@@ -21,59 +21,58 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.lareira.api.event.RecursoPadraoCriadoEvent;
-import br.com.lareira.api.model.Lareira;
-import br.com.lareira.api.repository.LareiraRepository;
-import br.com.lareira.api.service.LareiraService;
+import br.com.lareira.api.model.Casal;
+import br.com.lareira.api.repository.CasalRepository;
+import br.com.lareira.api.service.CasalService;
 
 @RestController
-@RequestMapping("/lareiras")
-public class LareiraResource {
-
+@RequestMapping("/casais")
+public class CasalResource {
+	
 	@Autowired
-	private LareiraRepository repository;
+	private CasalRepository repository;
 
 	@Autowired
 	private ApplicationEventPublisher publisher;
 
 	@Autowired
-	private LareiraService service;
-
+	private CasalService service;
+	
 	@PostMapping
-	@PreAuthorize("hasAuthority('LAREIRA_INSERT') and #oauth2.hasScope('write')")
-	public ResponseEntity<Lareira> inserir(@Valid @RequestBody Lareira lareira, HttpServletResponse response) {
-		Lareira lareiraSalva = repository.save(lareira);
-		publisher.publishEvent(new RecursoPadraoCriadoEvent(this, response, lareiraSalva.getIdLareira()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(lareiraSalva);
+	@PreAuthorize("hasAuthority('CASAL_INSERT') and #oauth2.hasScope('write')")
+	public ResponseEntity<Casal> inserir(@Valid @RequestBody Casal casal, HttpServletResponse response) {		
+		Casal casalSalvo = service.inserir(casal);				
+		publisher.publishEvent(new RecursoPadraoCriadoEvent(this, response, casalSalvo.getIdCasal()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(casalSalvo);
 	}
 
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('LAREIRA_UPDATE') and #oauth2.hasScope('write')")
-	public ResponseEntity<Lareira> atualizar(@PathVariable Long codigo, @Valid @RequestBody Lareira lareira) {
-		Lareira lareiraSalva = service.atualizar(codigo, lareira);
-		return ResponseEntity.ok(lareiraSalva);
+	@PreAuthorize("hasAuthority('CASAL_UPDATE') and #oauth2.hasScope('write')")
+	public ResponseEntity<Casal> atualizar(@PathVariable Long codigo, @Valid @RequestBody Casal casal) {
+		Casal casalSalvo = service.atualizar(codigo, casal);
+		return ResponseEntity.ok(casalSalvo);
 	}
 
 	@DeleteMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('LAREIRA_DELETE') and #oauth2.hasScope('delete')")
+	@PreAuthorize("hasAuthority('CASAL_DELETE') and #oauth2.hasScope('delete')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletar(@PathVariable Long codigo) {
 		repository.delete(codigo);
 	}
 
 	@GetMapping
-	@PreAuthorize("hasAuthority('LAREIRA_VIEW') and #oauth2.hasScope('read')")
-	public List<Lareira> listar() {
+	@PreAuthorize("hasAuthority('CASAL_VIEW') and #oauth2.hasScope('read')")
+	public List<Casal> listar() {
 		return repository.findAll();
 	}
 
 	@GetMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('LAREIRA_VIEW') and #oauth2.hasScope('read')")
-	public ResponseEntity<Lareira> retornaPeloCodigo(@PathVariable Long codigo) {
+	@PreAuthorize("hasAuthority('CASAL_VIEW') and #oauth2.hasScope('read')")
+	public ResponseEntity<Casal> retornaPeloCodigo(@PathVariable Long codigo) {
 		if (repository.findOne(codigo) == null) {
 			return ResponseEntity.notFound().build();
 		} else {
 			return ResponseEntity.ok().body(repository.getOne(codigo));
 		}
 	}
-
 }

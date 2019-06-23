@@ -1,13 +1,19 @@
 package br.com.lareira.api.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-import javax.persistence.EmbeddedId;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "LIVRO_PRESENCA_PERSEVERANCA")
@@ -15,34 +21,72 @@ public class LivroPresencaPerseveranca implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	protected LivroPresencaPerseverancaPK livroPresencaPerseverancaPK;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idpresenca")
+	private Long idPresenca;
 
-	@JoinColumns({ 
-			@JoinColumn(name = "idcasalanfitriao", referencedColumnName = "idcasal", insertable = false, updatable = false),
-			@JoinColumn(name = "idlareira", referencedColumnName = "idlareira", insertable = false, updatable = false) })
-	@ManyToOne(optional = false)
-	private Casal casal;
-
-	@JoinColumns({
-			@JoinColumn(name = "idlareira", referencedColumnName = "idlareira", insertable = false, updatable = false),
-			@JoinColumn(name = "idgp", referencedColumnName = "idgp", insertable = false, updatable = false) })
-	@ManyToOne(optional = false)
+	@NotNull
+	@JoinColumn(name = "idgp", insertable = false, updatable = false, nullable = false)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	private GrupoPerseveranca grupoPerseveranca;
 
-	public LivroPresencaPerseverancaPK getLivroPresencaPerseverancaPK() {
-		return livroPresencaPerseverancaPK;
+	@NotNull
+	@JoinColumn(name = "idcasalanfitriao", insertable = false, updatable = false, nullable = false)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	private Casal casal;
+
+	@NotNull
+	private LocalDate data;
+
+	@NotNull
+	private LocalTime hora;
+
+	public Long getIdPresenca() {
+		return idPresenca;
 	}
 
-	public void setLivroPresencaPerseverancaPK(LivroPresencaPerseverancaPK livroPresencaPerseverancaPK) {
-		this.livroPresencaPerseverancaPK = livroPresencaPerseverancaPK;
+	public void setIdPresenca(Long idPresenca) {
+		this.idPresenca = idPresenca;
+	}
+
+	public GrupoPerseveranca getGrupoPerseveranca() {
+		return grupoPerseveranca;
+	}
+
+	public void setGrupoPerseveranca(GrupoPerseveranca grupoPerseveranca) {
+		this.grupoPerseveranca = grupoPerseveranca;
+	}
+
+	public Casal getCasal() {
+		return casal;
+	}
+
+	public void setCasal(Casal casal) {
+		this.casal = casal;
+	}
+
+	public LocalDate getData() {
+		return data;
+	}
+
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+
+	public LocalTime getHora() {
+		return hora;
+	}
+
+	public void setHora(LocalTime hora) {
+		this.hora = hora;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((livroPresencaPerseverancaPK == null) ? 0 : livroPresencaPerseverancaPK.hashCode());
+		result = prime * result + ((idPresenca == null) ? 0 : idPresenca.hashCode());
 		return result;
 	}
 
@@ -55,12 +99,18 @@ public class LivroPresencaPerseveranca implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		LivroPresencaPerseveranca other = (LivroPresencaPerseveranca) obj;
-		if (livroPresencaPerseverancaPK == null) {
-			if (other.livroPresencaPerseverancaPK != null)
+		if (idPresenca == null) {
+			if (other.idPresenca != null)
 				return false;
-		} else if (!livroPresencaPerseverancaPK.equals(other.livroPresencaPerseverancaPK))
+		} else if (!idPresenca.equals(other.idPresenca))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "LivroPresencaPerseveranca [idPresenca=" + idPresenca + ", grupoPerseveranca=" + grupoPerseveranca
+				+ ", casal=" + casal + ", data=" + data + ", hora=" + hora + "]";
 	}
 
 }

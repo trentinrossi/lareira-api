@@ -3,7 +3,6 @@ package br.com.lareira.api.model;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,14 +19,10 @@ import javax.validation.constraints.Size;
 @Table(name = "GRUPO")
 public class Grupo implements Serializable {	
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "idgrupo")
     private Integer idGrupo;
 	

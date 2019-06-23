@@ -14,9 +14,6 @@ import javax.validation.constraints.Size;
 @Table(name = "LAREIRA")
 public class Lareira implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -140,4 +137,11 @@ public class Lareira implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Lareira [idLareira=" + idLareira + ", nome=" + nome + ", endereco=" + endereco + ", bairro=" + bairro
+				+ ", cep=" + cep + ", cidade=" + cidade + ", estado=" + estado + ", telefone=" + telefone + "]";
+	}
+	
 }

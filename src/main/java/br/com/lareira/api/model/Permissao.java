@@ -3,36 +3,34 @@ package br.com.lareira.api.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "PERMISSAO")
 public class Permissao implements Serializable {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
-	
-	@EmbeddedId
-	protected PermissaoPK permissaoPK;
 
-	@Column(name = "caninsert")
-	private Boolean canInsert;
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idpermissao")
+    private Long idPermissao;
 
-	@Column(name = "canupdate")
-	private Boolean canUpdate;
+	@NotNull
+	@Column(name = "idgrupo")
+	private Long idGrupo;
 
-	@Column(name = "candelete")
-	private Boolean canDelete;
-
-	@Column(name = "canview")
-	private Boolean canView;
+	@NotNull
+	@Column(name = "identidade")
+	private Long idEntidade;
 
 	@JoinColumn(name = "idgrupo", referencedColumnName = "idgrupo", insertable = false, updatable = false)
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
@@ -42,12 +40,52 @@ public class Permissao implements Serializable {
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	private Entidade entidade;
 
-	public PermissaoPK getPermissaoPK() {
-		return permissaoPK;
+	@NotNull
+	@Column(name = "caninsert")
+	private Boolean canInsert;
+
+	@NotNull
+	@Column(name = "canupdate")
+	private Boolean canUpdate;
+
+	@NotNull
+	@Column(name = "candelete")
+	private Boolean canDelete;
+
+	@NotNull
+	@Column(name = "canview")
+	private Boolean canView;
+
+	public Long getIdGrupo() {
+		return idGrupo;
 	}
 
-	public void setPermissaoPK(PermissaoPK permissaoPK) {
-		this.permissaoPK = permissaoPK;
+	public void setIdGrupo(Long idGrupo) {
+		this.idGrupo = idGrupo;
+	}
+
+	public Long getIdEntidade() {
+		return idEntidade;
+	}
+
+	public void setIdEntidade(Long idEntidade) {
+		this.idEntidade = idEntidade;
+	}
+
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+	public Entidade getEntidade() {
+		return entidade;
+	}
+
+	public void setEntidade(Entidade entidade) {
+		this.entidade = entidade;
 	}
 
 	public Boolean getCanInsert() {
@@ -82,27 +120,12 @@ public class Permissao implements Serializable {
 		this.canView = canView;
 	}
 
-	public Grupo getGrupo() {
-		return grupo;
-	}
-
-	public void setGrupo(Grupo grupo) {
-		this.grupo = grupo;
-	}
-
-	public Entidade getEntidade() {
-		return entidade;
-	}
-
-	public void setEntidade(Entidade entidade) {
-		this.entidade = entidade;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((permissaoPK == null) ? 0 : permissaoPK.hashCode());
+		result = prime * result + ((idEntidade == null) ? 0 : idEntidade.hashCode());
+		result = prime * result + ((idGrupo == null) ? 0 : idGrupo.hashCode());
 		return result;
 	}
 
@@ -115,18 +138,24 @@ public class Permissao implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Permissao other = (Permissao) obj;
-		if (permissaoPK == null) {
-			if (other.permissaoPK != null)
+		if (idEntidade == null) {
+			if (other.idEntidade != null)
 				return false;
-		} else if (!permissaoPK.equals(other.permissaoPK))
+		} else if (!idEntidade.equals(other.idEntidade))
+			return false;
+		if (idGrupo == null) {
+			if (other.idGrupo != null)
+				return false;
+		} else if (!idGrupo.equals(other.idGrupo))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Permissao [permissaoPK=" + permissaoPK + ", canInsert=" + canInsert + ", canUpdate=" + canUpdate
-				+ ", canDelete=" + canDelete + ", canView=" + canView + ", grupo=" + grupo.getNome() + ", entidade=" + entidade.getNomeTabelaBanco()
-				+ "]";
+		return "Permissao [idGrupo=" + idGrupo + ", idEntidade=" + idEntidade + ", grupo=" + grupo + ", entidade="
+				+ entidade + ", canInsert=" + canInsert + ", canUpdate=" + canUpdate + ", canDelete=" + canDelete
+				+ ", canView=" + canView + "]";
 	}
+
 }

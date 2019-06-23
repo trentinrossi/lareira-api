@@ -1,17 +1,12 @@
 package br.com.lareira.api.model;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -23,22 +18,18 @@ public class GrupoPerseverancaFuncao implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Basic(optional = false)
 	@Column(name = "idgpfuncao")
-	private Integer idGPFuncao;
+	private Long idGPFuncao;
 
 	@Size(max = 50)
 	@Column(name = "nome")
 	private String nome;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idGPFuncao", fetch = FetchType.LAZY)
-	private List<GrupoPerseverancaCasais> grupoPerseverancaCasaisList;
-
-	public Integer getIdGPFuncao() {
+	public Long getIdGPFuncao() {
 		return idGPFuncao;
 	}
 
-	public void setIdGPFuncao(Integer idGPFuncao) {
+	public void setIdGPFuncao(Long idGPFuncao) {
 		this.idGPFuncao = idGPFuncao;
 	}
 
@@ -48,14 +39,6 @@ public class GrupoPerseverancaFuncao implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public List<GrupoPerseverancaCasais> getGrupoPerseverancaCasaisList() {
-		return grupoPerseverancaCasaisList;
-	}
-
-	public void setGrupoPerseverancaCasaisList(List<GrupoPerseverancaCasais> grupoPerseverancaCasaisList) {
-		this.grupoPerseverancaCasaisList = grupoPerseverancaCasaisList;
 	}
 
 	@Override

@@ -8,12 +8,13 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.lareira.api.event.RecursoCriadoEvent;
+import br.com.lareira.api.event.RecursoPadraoCriadoEvent;
 
 @Component
-public class RecursoCriadoListener implements ApplicationListener<RecursoCriadoEvent> {
+public class RecursoPadraoCriadoListener implements ApplicationListener<RecursoPadraoCriadoEvent> {
+	
 	@Override
-	public void onApplicationEvent(RecursoCriadoEvent recursoCriadoEvent) {
+	public void onApplicationEvent(RecursoPadraoCriadoEvent recursoCriadoEvent) {
 		HttpServletResponse response = recursoCriadoEvent.getResponse();
 		Long codigo = recursoCriadoEvent.getCodigo();
 

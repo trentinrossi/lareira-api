@@ -6,115 +6,115 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Table(name = "CASAL")
 public class Casal implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idcasal")
+    private Long idCasal;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "casal")
-    private List<GrupoPerseverancaCasais> grupoPerseverancaCasaisList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "casal")
-    private List<LivroPresencaPerseveranca> livroPresencaPerseverancaList;
-
-    @EmbeddedId
-    protected CasalPK casalPK;
-    
-    @Size(max = 45)
+	@NotNull
+	@JoinColumn(name = "idlareira")
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	private Lareira lareira;
+	
+	@Size(max = 45)
 	@Column(name = "maridonome")
-    private String maridoNome;
-    
-    @Size(max = 45)
-    @Column(name = "maridosobrenome")
-    private String maridoSobrenome;
-    
-    @Column(name = "maridodatanascimento")
-    private LocalDate maridoDataNascimento;
-    
-    @Size(max = 45)
-    @Column(name = "maridoprofissao")
-    private String maridoProfissao;
-    
-    @Size(max = 45)
-    @Column(name = "maridotelcelular")
-    private String maridoTelCelular;
-    
-    @Size(max = 70)
-    @Column(name = "maridoemail")
-    private String maridoEmail;
-    
-    @Size(max = 80)
-    @Column(name = "maridoproblemasaude")
-    private String maridoProblemaSaude;
-    
-    @Size(max = 45)
-    @Column(name = "esposanome")
-    private String esposaNome;
-    
-    @Size(max = 45)
-    @Column(name = "esposasobrenome")
-    private String esposaSobrenome;
-    
-    @Column(name = "esposadatanascimento")
-    private LocalDate esposaDataNascimento;
-    
-    @Size(max = 45)
-    @Column(name = "esposaprofissao")
-    private String esposaProfissao;
-    
-    @Size(max = 45)
-    @Column(name = "esposatelcelular")
-    private String esposaTelCelular;
-    
-    @Size(max = 70)
-    @Column(name = "esposaemail")
-    private String esposaEmail;
-    
-    @Size(max = 80)
-    @Column(name = "esposaproblemasaude")
-    private String esposaProblemaSaude;
-    
-    @JoinColumn(name = "idlareira", referencedColumnName = "idlareira", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Lareira lareira;
-    
+	private String maridoNome;
+
+	@Size(max = 45)
+	@Column(name = "maridosobrenome")
+	private String maridoSobrenome;
+
+	@Column(name = "maridodatanascimento")
+	private LocalDate maridoDataNascimento;
+
+	@Size(max = 45)
+	@Column(name = "maridoprofissao")
+	private String maridoProfissao;
+
+	@Size(max = 45)
+	@Column(name = "maridotelcelular")
+	private String maridoTelCelular;
+
+	@Size(max = 70)
+	@Email
+	@Column(name = "maridoemail")
+	private String maridoEmail;
+
+	@Size(max = 80)
+	@Column(name = "maridoproblemasaude")
+	private String maridoProblemaSaude;
+
+	@Size(max = 45)
+	@Column(name = "esposanome")
+	private String esposaNome;
+
+	@Size(max = 45)
+	@Column(name = "esposasobrenome")
+	private String esposaSobrenome;
+
+	@Column(name = "esposadatanascimento")
+	private LocalDate esposaDataNascimento;
+
+	@Size(max = 45)
+	@Column(name = "esposaprofissao")
+	private String esposaProfissao;
+
+	@Size(max = 45)
+	@Column(name = "esposatelcelular")
+	private String esposaTelCelular;
+
+	@Size(max = 70)
+	@Email
+	@Column(name = "esposaemail")
+	private String esposaEmail;
+
+	@Size(max = 80)
+	@Column(name = "esposaproblemasaude")
+	private String esposaProblemaSaude;
+	
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "casal", fetch = FetchType.EAGER)
     private List<Filho> filhoList;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "casal")
+	private List<GrupoPerseverancaCasais> grupoPerseverancaCasaisList;
 
-	public List<GrupoPerseverancaCasais> getGrupoPerseverancaCasaisList() {
-		return grupoPerseverancaCasaisList;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "casal")
+	private List<LivroPresencaPerseveranca> livroPresencaPerseverancaList;
+
+	public Long getIdCasal() {
+		return idCasal;
 	}
 
-	public void setGrupoPerseverancaCasaisList(List<GrupoPerseverancaCasais> grupoPerseverancaCasaisList) {
-		this.grupoPerseverancaCasaisList = grupoPerseverancaCasaisList;
+	public void setIdCasal(Long idCasal) {
+		this.idCasal = idCasal;
 	}
 
-	public List<LivroPresencaPerseveranca> getLivroPresencaPerseverancaList() {
-		return livroPresencaPerseverancaList;
+	public Lareira getLareira() {
+		return lareira;
 	}
 
-	public void setLivroPresencaPerseverancaList(List<LivroPresencaPerseveranca> livroPresencaPerseverancaList) {
-		this.livroPresencaPerseverancaList = livroPresencaPerseverancaList;
-	}
-
-	public CasalPK getCasalPK() {
-		return casalPK;
-	}
-
-	public void setCasalPK(CasalPK casalPK) {
-		this.casalPK = casalPK;
+	public void setLareira(Lareira lareira) {
+		this.lareira = lareira;
 	}
 
 	public String getMaridoNome() {
@@ -229,14 +229,6 @@ public class Casal implements Serializable {
 		this.esposaProblemaSaude = esposaProblemaSaude;
 	}
 
-	public Lareira getLareira() {
-		return lareira;
-	}
-
-	public void setLareira(Lareira lareira) {
-		this.lareira = lareira;
-	}
-
 	public List<Filho> getFilhoList() {
 		return filhoList;
 	}
@@ -245,11 +237,27 @@ public class Casal implements Serializable {
 		this.filhoList = filhoList;
 	}
 
+	public List<GrupoPerseverancaCasais> getGrupoPerseverancaCasaisList() {
+		return grupoPerseverancaCasaisList;
+	}
+
+	public void setGrupoPerseverancaCasaisList(List<GrupoPerseverancaCasais> grupoPerseverancaCasaisList) {
+		this.grupoPerseverancaCasaisList = grupoPerseverancaCasaisList;
+	}
+
+	public List<LivroPresencaPerseveranca> getLivroPresencaPerseverancaList() {
+		return livroPresencaPerseverancaList;
+	}
+
+	public void setLivroPresencaPerseverancaList(List<LivroPresencaPerseveranca> livroPresencaPerseverancaList) {
+		this.livroPresencaPerseverancaList = livroPresencaPerseverancaList;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((casalPK == null) ? 0 : casalPK.hashCode());
+		result = prime * result + ((idCasal == null) ? 0 : idCasal.hashCode());
 		return result;
 	}
 
@@ -262,11 +270,24 @@ public class Casal implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Casal other = (Casal) obj;
-		if (casalPK == null) {
-			if (other.casalPK != null)
+		if (idCasal == null) {
+			if (other.idCasal != null)
 				return false;
-		} else if (!casalPK.equals(other.casalPK))
+		} else if (!idCasal.equals(other.idCasal))
 			return false;
 		return true;
-	}       
+	}
+
+	@Override
+	public String toString() {
+		return "Casal [idCasal=" + idCasal + ", lareira=" + lareira + ", maridoNome=" + maridoNome
+				+ ", maridoSobrenome=" + maridoSobrenome + ", maridoDataNascimento=" + maridoDataNascimento
+				+ ", maridoProfissao=" + maridoProfissao + ", maridoTelCelular=" + maridoTelCelular + ", maridoEmail="
+				+ maridoEmail + ", maridoProblemaSaude=" + maridoProblemaSaude + ", esposaNome=" + esposaNome
+				+ ", esposaSobrenome=" + esposaSobrenome + ", esposaDataNascimento=" + esposaDataNascimento
+				+ ", esposaProfissao=" + esposaProfissao + ", esposaTelCelular=" + esposaTelCelular + ", esposaEmail="
+				+ esposaEmail + ", esposaProblemaSaude=" + esposaProblemaSaude + ", filhoList=" + filhoList
+				+ ", grupoPerseverancaCasaisList=" + grupoPerseverancaCasaisList + ", livroPresencaPerseverancaList="
+				+ livroPresencaPerseverancaList + "]";
+	}
 }

@@ -11,12 +11,17 @@ CREATE TABLE USUARIO (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO USUARIO (idUsuario, Login, Senha, NomeCompleto, Email, Descricao, Ativo) VALUES (1, 'admin', '$2a$10$/qBSCFmqbqSX010h3E8no..lGKyvc0dDg614Fgw1J.68BeamxWyFy', 'Usuário Admin', 'admin@admin.com', 'Usuário Admin', 1);
+INSERT INTO USUARIO (idUsuario, Login, Senha, NomeCompleto, Email, Descricao, Ativo) VALUES (2, 'maria', '$2a$10$Zc3w6HyuPOPXamaMhh.PQOXvDnEsadztbfi6/RyZWJDzimE8WQjaq', 'Maria Angela', 'maria@example.com', 'Usuário Comun', 1);
 
 CREATE TABLE GRUPO (
   idGrupo INT NOT NULL AUTO_INCREMENT,
   Nome VARCHAR(100) NULL,
   PRIMARY KEY (idGrupo)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO GRUPO VALUES (1,'Admin');
+INSERT INTO GRUPO VALUES (2,'Lareira Cascavel');
+INSERT INTO GRUPO VALUES (3,'Lareira Toledo');
 
 CREATE TABLE USUARIO_GRUPO (
   idGrupo INT NOT NULL,
@@ -36,6 +41,9 @@ CREATE TABLE USUARIO_GRUPO (
     ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO USUARIO_GRUPO VALUES (1,1);
+INSERT INTO USUARIO_GRUPO VALUES (2,2);
+
 CREATE TABLE ENTIDADE (
   idEntidade INT NOT NULL AUTO_INCREMENT,
   Nome VARCHAR(45) NULL,
@@ -45,24 +53,33 @@ CREATE TABLE ENTIDADE (
   UNIQUE INDEX Nome_UNIQUE (Nome ASC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO ENTIDADE VALUES (1,'Lareira','LAREIRA','Cadastro de Lareiras');
+INSERT INTO ENTIDADE VALUES (2,'Usuario','USUARIO','Cadastro de Usuarios');
+INSERT INTO ENTIDADE VALUES (3,'Entidade','ENTIDADE','Cadastro de Entidades');
+
 CREATE TABLE PERMISSAO (
+  idPermissao INT NOT NULL,
   idGrupo INT NOT NULL,
   idEntidade INT NOT NULL,
-  canInsert TINYINT(1) NULL,
-  canUpdate TINYINT(1) NULL,
-  canDelete TINYINT(1) NULL,
-  canView TINYINT(1) NULL,
+  canInsert TINYINT(1) NOT NULL,
+  canUpdate TINYINT(1) NOT NULL,
+  canDelete TINYINT(1) NOT NULL,
+  canView TINYINT(1) NOT NULL,
   INDEX fk_PERMISSAO_GRUPO1_idx (idGrupo ASC),
   INDEX fk_PERMISSAO_ENTIDADE1_idx (idEntidade ASC),
-  PRIMARY KEY (idGrupo, idEntidade),
+  PRIMARY KEY (idPermissao),
   CONSTRAINT fk_PERMISSAO_GRUPO1
     FOREIGN KEY (idGrupo)
-    REFERENCES GRUPO (idGrupo)
+    REFERENCES lareira.GRUPO (idGrupo)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_PERMISSAO_ENTIDADE1
     FOREIGN KEY (idEntidade)
-    REFERENCES ENTIDADE (idEntidade)
+    REFERENCES lareira.ENTIDADE (idEntidade)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO PERMISSAO VALUES (1,1,1,1,1,1,1);
+INSERT INTO PERMISSAO VALUES (2,2,1,1,0,0,0);
+INSERT INTO PERMISSAO VALUES (3,2,2,0,0,0,0);

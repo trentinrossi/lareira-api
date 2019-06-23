@@ -10,9 +10,12 @@ CREATE TABLE LAREIRA (
   PRIMARY KEY (idLareira)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO LAREIRA VALUES (1,'Lareira Cascavel','Rua Santa Catarina','Centro','85806250','Cascavel','PR','(45) 9 9999-4545');
+INSERT INTO LAREIRA VALUES (2,'Lareira São Cristóvão, Cascavel','Rua das amélias','São Cristóvão','85806250','Cascavel','PR','(45) 9 9929-4879');
+
 CREATE TABLE CASAL (
-  idLareira INT NOT NULL,
   idCasal INT NOT NULL AUTO_INCREMENT,
+  idLareira INT NOT NULL,
   MaridoNome VARCHAR(45) NULL,
   MaridoSobrenome VARCHAR(45) NULL,
   MaridoDataNascimento DATE NULL,
@@ -27,7 +30,7 @@ CREATE TABLE CASAL (
   EsposaTelCelular VARCHAR(45) NULL,
   EsposaEmail VARCHAR(70) NULL,
   EsposaProblemaSaude VARCHAR(80) NULL,
-  PRIMARY KEY (idCasal, idLareira),
+  PRIMARY KEY (idCasal),
   INDEX fk_CASAL_LAREIRA1_idx (idLareira ASC),
   CONSTRAINT fk_CASAL_LAREIRA1
     FOREIGN KEY (idLareira)
@@ -37,17 +40,16 @@ CREATE TABLE CASAL (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE FILHO (
-  idLareira INT NOT NULL,
-  idCasal INT NOT NULL,
   IdFilho INT NOT NULL AUTO_INCREMENT,
+  idCasal INT NOT NULL,
   Nome VARCHAR(45) NULL,
   Sexo CHAR(2) NULL,
   DataNascimento DATE NULL,
-  PRIMARY KEY (IdFilho, idLareira, idCasal),
-  INDEX fk_FILHO_CASAL1_idx (idCasal ASC, idLareira ASC),
+  PRIMARY KEY (IdFilho),
+  INDEX fk_FILHO_CASAL1_idx (idCasal ASC),
   CONSTRAINT fk_FILHO_CASAL1
-    FOREIGN KEY (idCasal , idLareira)
-    REFERENCES CASAL (idCasal , idLareira)
+    FOREIGN KEY (idCasal)
+    REFERENCES CASAL (idCasal)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

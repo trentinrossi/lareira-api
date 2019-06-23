@@ -6,12 +6,16 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -20,8 +24,15 @@ public class GrupoPerseveranca implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	protected GrupoPerseverancaPK grupoPerseverancaPK;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idgp")
+	private Long idGp;
+
+	@NotNull
+	@JoinColumn(name = "idlareira", insertable = false, updatable = false, nullable = false)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	private Lareira lareira;
 
 	@Size(max = 45)
 	@Column(name = "nome")
@@ -33,19 +44,23 @@ public class GrupoPerseveranca implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoPerseveranca")
 	private List<GrupoPerseverancaCasais> grupoPerseverancaCasaisList;
 
-	@JoinColumn(name = "idlareira", referencedColumnName = "idlareira", insertable = false, updatable = false)
-	@ManyToOne(optional = false)
-	private Lareira lareira;
-
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoPerseveranca")
 	private List<LivroPresencaPerseveranca> livroPresencaPerseverancaList;
 
-	public GrupoPerseverancaPK getGrupoPerseverancaPK() {
-		return grupoPerseverancaPK;
+	public Long getIdGp() {
+		return idGp;
 	}
 
-	public void setGrupoPerseverancaPK(GrupoPerseverancaPK grupoPerseverancaPK) {
-		this.grupoPerseverancaPK = grupoPerseverancaPK;
+	public void setIdGp(Long idGp) {
+		this.idGp = idGp;
+	}
+
+	public Lareira getLareira() {
+		return lareira;
+	}
+
+	public void setLareira(Lareira lareira) {
+		this.lareira = lareira;
 	}
 
 	public String getNome() {
@@ -72,14 +87,6 @@ public class GrupoPerseveranca implements Serializable {
 		this.grupoPerseverancaCasaisList = grupoPerseverancaCasaisList;
 	}
 
-	public Lareira getLareira() {
-		return lareira;
-	}
-
-	public void setLareira(Lareira lareira) {
-		this.lareira = lareira;
-	}
-
 	public List<LivroPresencaPerseveranca> getLivroPresencaPerseverancaList() {
 		return livroPresencaPerseverancaList;
 	}
@@ -92,7 +99,7 @@ public class GrupoPerseveranca implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((grupoPerseverancaPK == null) ? 0 : grupoPerseverancaPK.hashCode());
+		result = prime * result + ((idGp == null) ? 0 : idGp.hashCode());
 		return result;
 	}
 
@@ -105,12 +112,19 @@ public class GrupoPerseveranca implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		GrupoPerseveranca other = (GrupoPerseveranca) obj;
-		if (grupoPerseverancaPK == null) {
-			if (other.grupoPerseverancaPK != null)
+		if (idGp == null) {
+			if (other.idGp != null)
 				return false;
-		} else if (!grupoPerseverancaPK.equals(other.grupoPerseverancaPK))
+		} else if (!idGp.equals(other.idGp))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "GrupoPerseveranca [idGp=" + idGp + ", lareira=" + lareira + ", nome=" + nome + ", dataInicio="
+				+ dataInicio + ", grupoPerseverancaCasaisList=" + grupoPerseverancaCasaisList
+				+ ", livroPresencaPerseverancaList=" + livroPresencaPerseverancaList + "]";
 	}
 
 }
