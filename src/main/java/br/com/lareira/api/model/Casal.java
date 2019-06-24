@@ -15,10 +15,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "CASAL")
@@ -92,8 +95,10 @@ public class Casal implements Serializable {
 	@Column(name = "esposaproblemasaude")
 	private String esposaProblemaSaude;
 	
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "casal", fetch = FetchType.EAGER)
-    private List<Filho> filhoList;
+	@JsonIgnoreProperties("casal")
+	@Valid
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "casal", orphanRemoval = true)
+    private List<Filho> filhos;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "casal")
 	private List<GrupoPerseverancaCasais> grupoPerseverancaCasaisList;
@@ -229,12 +234,12 @@ public class Casal implements Serializable {
 		this.esposaProblemaSaude = esposaProblemaSaude;
 	}
 
-	public List<Filho> getFilhoList() {
-		return filhoList;
+	public List<Filho> getFilhos() {
+		return filhos;
 	}
 
-	public void setFilhoList(List<Filho> filhoList) {
-		this.filhoList = filhoList;
+	public void setFilhoList(List<Filho> filhos) {
+		this.filhos = filhos;
 	}
 
 	public List<GrupoPerseverancaCasais> getGrupoPerseverancaCasaisList() {
@@ -286,7 +291,7 @@ public class Casal implements Serializable {
 				+ maridoEmail + ", maridoProblemaSaude=" + maridoProblemaSaude + ", esposaNome=" + esposaNome
 				+ ", esposaSobrenome=" + esposaSobrenome + ", esposaDataNascimento=" + esposaDataNascimento
 				+ ", esposaProfissao=" + esposaProfissao + ", esposaTelCelular=" + esposaTelCelular + ", esposaEmail="
-				+ esposaEmail + ", esposaProblemaSaude=" + esposaProblemaSaude + ", filhoList=" + filhoList
+				+ esposaEmail + ", esposaProblemaSaude=" + esposaProblemaSaude + ", filhoList=" + filhos
 				+ ", grupoPerseverancaCasaisList=" + grupoPerseverancaCasaisList + ", livroPresencaPerseverancaList="
 				+ livroPresencaPerseverancaList + "]";
 	}

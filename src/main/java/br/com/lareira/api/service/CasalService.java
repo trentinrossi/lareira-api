@@ -27,6 +27,9 @@ public class CasalService {
 	 */
 	public Casal inserir(Casal casal) {
 		validarLareira(casal);
+		
+		casal.getFilhos().forEach(c -> c.setCasal(casal));
+		
 		return repository.save(casal);
 	}
 	
@@ -38,8 +41,14 @@ public class CasalService {
 	 */
 	public Casal atualizar(Long codigo, Casal casal) {
 		Casal r = retornaCasalPeloCodigo(codigo);
+		
+		r.getFilhos().clear();
+		r.getFilhos().addAll(casal.getFilhos());
+		r.getFilhos().forEach(c -> c.setCasal(r));
+		
 		validarLareira(casal);
-		BeanUtils.copyProperties(casal, r, "idCasal");
+		BeanUtils.copyProperties(casal, r, "idCasal", "filhos");
+		
 		return repository.save(r);
 	}
 

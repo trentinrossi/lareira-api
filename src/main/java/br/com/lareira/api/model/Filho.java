@@ -5,15 +5,15 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "FILHO")
@@ -26,11 +26,11 @@ public class Filho implements Serializable {
     @Column(name = "idfilho")
     private Long idFilho;
 
-	@NotNull
-	@JoinColumn(name = "idcasal", insertable = false, updatable = false, nullable=false)
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@JoinColumn(name = "idcasal")
+	@ManyToOne
 	private Casal casal;
 	
+	@NotEmpty
 	@Size(max = 45)
 	@Column(name = "nome")
 	private String nome;
