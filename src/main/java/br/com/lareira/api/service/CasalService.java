@@ -16,39 +16,48 @@ public class CasalService {
 
 	@Autowired
 	private CasalRepository repository;
-	
-	@Autowired 
+
+	@Autowired
 	private LareiraRepository lareiraRepo;
 
 	/**
 	 * Valida informações antes de inserir
+	 * 
 	 * @param casal
 	 * @return
 	 */
 	public Casal inserir(Casal casal) {
 		validarLareira(casal);
-		
-		casal.getFilhos().forEach(c -> c.setCasal(casal));
-		
+
+		if (casal.getFilhos() != null) {
+			casal.getFilhos().forEach(c -> c.setCasal(casal));
+		}
+
 		return repository.save(casal);
 	}
-	
+
 	/**
-	 * Valida informações antes de alterar	
+	 * Valida informações antes de alterar
+	 * 
 	 * @param codigo
 	 * @param casal
 	 * @return
 	 */
 	public Casal atualizar(Long codigo, Casal casal) {
+		System.out.println("Casal: "+codigo +"--> "+casal);
+		
 		Casal r = retornaCasalPeloCodigo(codigo);
 		
 		r.getFilhos().clear();
-		r.getFilhos().addAll(casal.getFilhos());
-		r.getFilhos().forEach(c -> c.setCasal(r));
-		
+
+		if (casal.getFilhos() != null) {
+			r.getFilhos().addAll(casal.getFilhos());
+			r.getFilhos().forEach(c -> c.setCasal(r));
+		}
+
 		validarLareira(casal);
 		BeanUtils.copyProperties(casal, r, "idCasal", "filhos");
-		
+
 		return repository.save(r);
 	}
 

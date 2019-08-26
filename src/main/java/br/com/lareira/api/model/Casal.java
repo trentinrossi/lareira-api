@@ -63,7 +63,7 @@ public class Casal implements Serializable {
 	@Column(name = "maridoemail")
 	private String maridoEmail;
 
-	@Size(max = 80)
+	@Size(max = 300)
 	@Column(name = "maridoproblemasaude")
 	private String maridoProblemaSaude;
 
@@ -91,7 +91,7 @@ public class Casal implements Serializable {
 	@Column(name = "esposaemail")
 	private String esposaEmail;
 
-	@Size(max = 80)
+	@Size(max = 300)
 	@Column(name = "esposaproblemasaude")
 	private String esposaProblemaSaude;
 	
