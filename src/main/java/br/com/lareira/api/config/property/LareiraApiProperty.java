@@ -2,7 +2,7 @@ package br.com.lareira.api.config.property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties("lareira2")
+@ConfigurationProperties("lareira")
 public class LareiraApiProperty {
 
 	private String originPermitida = "http://localhost:4200";

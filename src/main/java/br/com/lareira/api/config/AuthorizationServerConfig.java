@@ -28,9 +28,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private AuthenticationManager authenticationManager;
 
 	@Override
-	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {		
+
 		clients.inMemory()
 			.withClient("angular")
+			// .secret(passwordEncoder.encode("@ngul@r0"))
 			.secret("@ngul@r0")
 			.scopes("read", "write", "delete")
 			.authorizedGrantTypes("password", "refresh_token")
